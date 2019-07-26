@@ -11,131 +11,94 @@ using SolverTools, SolverBenchmark
 include("C:/Users/Johann/Documents/BFGS/Test_Problems/trunk.jl")
 include("C:/Users/Johann/Documents/BFGS/Test_Problems/test_problems.jl")
 
-scale = true
-nlp, M = fletchcr(1000), [1, 3, 5, 10, 15, 20, 100, 1000]
-#nlp, M = nondquar(1000), [1, 3, 5, 10, 15, 20, 1000]
-solver_basic_1(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 1, bk_max =  0,
+solver_1(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 1, bk_max =  0,
     memory_bound = -1.0, scale = false)
-solver_scaling_1(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 1, bk_max =  0,
-    memory_bound = -1.0, scale = true)
-solver_bound_1(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 1, bk_max =  0,
-    memory_bound = 1.0, scale = false)
-solver_basic_3(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 3, bk_max =  0,
-        memory_bound = -1.0, scale = false)
-solver_scaling_3(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 3, bk_max =  0,
-        memory_bound = -1.0, scale = true)
-solver_bound_3(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 3, bk_max =  0,
-        memory_bound = 5.0e-02, scale = false)
-solver_basic_5(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 5, bk_max =  0,
-            memory_bound = -1.0, scale = false)
-solver_scaling_5(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 5, bk_max =  0,
-            memory_bound = -1.0, scale = true)
-solver_bound_5(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 5, bk_max =  0,
-            memory_bound = 1.0, scale = false)
-solver_basic_10(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 10, bk_max =  0,
-                memory_bound = -1.0, scale = false)
-solver_scaling_10(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 10, bk_max =  0,
-                memory_bound = -1.0, scale = true)
-solver_bound_10(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 10, bk_max =  0,
-                memory_bound = 5.0e-02, scale = false)
-solver_basic_15(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 15, bk_max =  0,
-                                memory_bound = -1.0, scale = false)
-solver_scaling_15(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 15, bk_max =  0,
-                                memory_bound = -1.0, scale = true)
-solver_bound_15(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 15, bk_max =  0,
-                                memory_bound = 5.0e-01, scale = false)
-solver_basic_20(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 20, bk_max =  0,
-                                memory_bound = -1.0, scale = false)
-solver_scaling_20(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 20, bk_max =  0,
-                                    memory_bound = -1.0, scale = true)
-solver_bound_20(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 20, bk_max =  0,
-                                    memory_bound = 5.0e-02, scale = false)
-solver_basic_100(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 100, bk_max =  0,
+solver_3(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 3, bk_max =  0,
     memory_bound = -1.0, scale = false)
-solver_scaling_100(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 100, bk_max =  0,
-    memory_bound = -1.0, scale = true)
-solver_bound_100(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 100, bk_max =  0,
-    memory_bound = 5.0e-01, scale = false)
-solver_basic_1000(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 1000, bk_max =  0,
+solver_5(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 5, bk_max =  0,
     memory_bound = -1.0, scale = false)
-solver_scaling_1000(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 1000, bk_max =  0,
-    memory_bound = -1.0, scale = true)
-solver_bound_1000(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 1000, bk_max =  0,
-    memory_bound = 5.0e-01, scale = false)
-solver_CG(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 1000, bk_max =  0,
-    memory_bound = -1.0, CG = true)
+solver_10(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 10, bk_max =  0,
+    memory_bound = -1.0, scale = false)
+solver_15(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 15, bk_max =  0,
+    memory_bound = -1.0, scale = false)
+solver_20(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 20, bk_max =  0,
+    memory_bound = -1.0, scale = false)
+solver_CG(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 20, bk_max =  0,
+    memory_bound = -1.0, scale = false, CG = true)
 
-"""
-solver_list = Dict(:Base1 => solver_basic_1, #:Bound1 => solver_bound_1,
-                :Base3 => solver_basic_3, #:Bound3 => solver_bound_3,
-                :Base5 => solver_basic_5, #:Bound5 => solver_bound_5,
-                :Base10 => solver_basic_10, #:Bound10 => solver_bound_10,
-                :Base15 => solver_basic_15, #:Bound15 => solver_bound_15,
-                :Base20 => solver_basic_20, #:Bound20 => solver_bound_20,
-                :Base100 => solver_basic_100, #:Bound100 => solver_bound_100,
-                :Base1000 => solver_basic_1000, #:Bound1000 => solver_bound_1000,
-                :CG => solver_CG)
-"""
 
-solver_list = Dict(:Bound5 => solver_bound_5,
-                    :Bound1 => solver_bound_1)
-                    #:Base100 => solver_bound_1000)
-                    #:CG => solver_CG)
+solver_list = Dict(:S1 => solver_1,
+                    :S3 => solver_3,
+                    :S5 => solver_5,
+                    :S10 => solver_10,
+                    :S15 => solver_15,
+                    :S20 => solver_20,
+                    :CG => solver_CG)
 
-prob_1 = fletchcr(1000)
-prob_2 = nondquar(1000)
-prob_3 = woods(1000)
-#prob_4 = noncvxun(1000)
-prob_5 = sparsine(1000)
-problem_list = [prob_1, prob_2, prob_3, prob_5]
+prob_1 = arglina()
+prob_2 = arglinb()
+prob_3 = arglinc()
+prob_4 = arwhead()
+prob_5 = bdqrtic()
+prob_6 = beale()
+prob_7 = broydn7d()
+prob_8 = brybnd()
+prob_9 = chainwoo()
+prob_10 = chnrosnb_mod()
+prob_11 = cosine()
+prob_12 = cragglvy()
+prob_13 = dixmaane()
+prob_14 = dixmaani()
+prob_15 = dixmaanm()
+prob_16 = dixon3dq()
+prob_17 = dqdrtic()
+prob_18 = dqrtic()
+prob_19 = edensch()
+prob_20 = eg2()
+prob_21 = engval1()
+prob_22 = errinros_mod()
+prob_23 = extrosnb()
+prob_24 = fletcbv2()
+prob_25 = fletcbv3_mod()
+prob_26 = fletchcr()
+prob_27 = freuroth()
+prob_28 = genhumps()
+prob_29 = genrose()
+prob_30 = genrose_nash()
+prob_31 = indef_mod()
+prob_32 = liarwhd()
+prob_33 = morebv()
+prob_34 = ncb20()
+prob_35 = ncb20b()
+prob_36 = noncvxu2()
+prob_37 = noncvxun()
+prob_38 = nondia()
+prob_39 = nondquar()
+prob_40 = NZF1()
+prob_41 = penalty2()
+prob_42 = penalty3()
+prob_43 = powellsg()
+prob_44 = power()
+prob_45 = quartc()
+prob_46 = sbrybnd()
+prob_47 = schmvett()
+prob_48 = scosine()
+prob_49 = sparsine()
+prob_50 = sparsqur()
+prob_51 = srosenbr()
+prob_52 = sinquad()
+prob_53 = tointgss()
+prob_54 = tquartic()
+prob_55 = tridia()
+prob_56 = vardim()
+prob_57 = woods()
+
+problem_list = [prob_1, prob_2,prob_3,prob_4,prob_5,prob_6,prob_7,prob_8,prob_9,
+                prob_10,prob_11,prob_12,prob_13,prob_14,prob_15,prob_16,prob_17,
+                prob_18,prob_19,prob_20,prob_21,prob_22,prob_23,prob_24,prob_25,
+                prob_26,prob_27,prob_28,prob_29,prob_30,prob_31,prob_32,prob_33,
+                prob_34,prob_35,prob_36,prob_37,prob_38,prob_39,prob_40,prob_41,
+                prob_42,prob_43,prob_44,prob_45,prob_46,prob_47,prob_48,prob_49,
+                prob_50,prob_51,prob_52,prob_53,prob_54,prob_55,prob_56,prob_57]
 
 stats = bmark_solvers(solver_list, problem_list)
-
-"""
-tables = ["Bound1.tex", "Base1.tex", "Bound3.tex", "Base3.tex", "Bound5.tex", "Base5.tex",
-            "Bound10.tex", "Base10.tex", "Bound15.tex", "Base15.tex",
-            "Bound20.tex", "Base20.tex", "Bound100.tex", "Base100.tex",
-            "Bound1000.tex", "Base1000.tex", "CG.tex"]
-key = [:Bound1, :Base1, :Bound3, :Base3, :Bound5, :Base5,
-            :Bound10, :Base10, :Bound15, :Base15,
-            :Bound20, :Base20, :Bound100, :Base100,
-            :Bound1000, :Base1000, :CG]
-"""
-tables = ["Bound5.tex", "Bound1.tex"]
-
-key = [:Bound5, :Bound1]
-
-for i in 1:length(key)
-    df = get(stats, key[i], false)
-    df1 = df[:, [2, 6, 7, 8, 9, 12, 13, 21]]
-    open(tables[i], "w") do io
-        latex_table(io, df1)
-    end
-end
-
-"""
-for m in M
-    println("____________")
-    println("memory = ", m)
-    stats = trunk(nlp, max_time = 120.0, nm_itmax = 400, memory = m, bk_max =  0,
-        memory_bound = -1.0, scale = scale);
-    println("neval_obj = ", nlp.counters.neval_obj)
-    println("neval_grad = ", nlp.counters.neval_grad)
-    println("neval_hprod = ", nlp.counters.neval_hprod)
-    print(stats)
-    reset!(nlp)
-end
-"""
-
-"""
-for m in M
-    println("____________")
-    println("memory = ", m, "+")
-    stats = trunk(nlp, max_time = 60.0, nm_itmax = 400, memory = m, bk_max =  0, memory_bound = 5.0e-01)
-    println("neval_obj = ", nlp.counters.neval_obj)
-    println("neval_grad = ", nlp.counters.neval_grad)
-    println("neval_hprod = ", nlp.counters.neval_hprod)
-    print(stats)
-    reset!(nlp)
-end
-"""

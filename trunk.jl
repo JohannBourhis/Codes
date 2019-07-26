@@ -27,6 +27,7 @@ function trunk(nlp :: AbstractNLPModel;
                memory :: Int = 1,
                memory_bound :: Float64=-1.0,
                scale :: Bool=false,
+               diag_scale :: Bool=false,
                CG :: Bool=false)
 
   start_time = time()
@@ -79,10 +80,9 @@ function trunk(nlp :: AbstractNLPModel;
     end
     (s, cg_stats) = with_logger(subsolver_logger) do
       if !CG
-        lbfgsTrunk(H, -∇f, m = memory,
-          atol=T(atol), rtol=cgtol,
-          radius=get_property(tr, :radius),
-          itmax=max(2 * n, 50), scale=scale)
+        lbfgsTrunk(H, -∇f, m = memory, atol=T(atol),
+          rtol=cgtol, radius=get_property(tr, :radius),
+          itmax=max(2 * n, 50), scale=scale, diag_scale=diag_scale)
       else
         cg(H, -∇f,
           atol=T(atol), rtol=cgtol,
