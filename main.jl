@@ -21,19 +21,17 @@ solver_10(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 10, bk_m
     memory_bound = -1.0, scale = false)
 solver_15(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 15, bk_max =  0,
     memory_bound = -1.0, scale = false)
-solver_20(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 20, bk_max =  0,
-    memory_bound = -1.0, scale = false)
-solver_CG(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 20, bk_max =  0,
-    memory_bound = -1.0, scale = false, CG = true)
+#solver_20(prob) = trunk(prob, max_time = 60.0, nm_itmax = 400, memory = 20, bk_max =  0,
+    #memory_bound = -1.0, scale = false)
+solver_CG(prob) = trunk(prob, CG = true, bk_max = 0)
 
 
-solver_list = Dict(:S1 => solver_1,
-                    :S3 => solver_3,
-                    :S5 => solver_5,
-                    :S10 => solver_10,
-                    :S15 => solver_15,
-                    :S20 => solver_20,
-                    :CG => solver_CG)
+solver_list = Dict(:CG => solver_CG, :m1 => solver_1,
+                    :m3 => solver_3, :m5 => solver_5,
+                    :m10 => solver_10)
+                    #:m15 => solver_15)
+                    #:S20 => solver_20,
+
 
 prob_1 = arglina()
 prob_2 = arglinb()
@@ -93,12 +91,18 @@ prob_55 = tridia()
 prob_56 = vardim()
 prob_57 = woods()
 
-problem_list = [prob_1, prob_2,prob_3,prob_4,prob_5,prob_6,prob_7,prob_8,prob_9,
-                prob_10,prob_11,prob_12,prob_13,prob_14,prob_15,prob_16,prob_17,
+problem_list = [prob_1, prob_2,prob_3,prob_4,prob_5,#prob_6,
+                prob_7,#prob_8,prob_9,prob_10,prob_11,
+                prob_12,prob_13,prob_14,prob_15,prob_16,prob_17,
                 prob_18,prob_19,prob_20,prob_21,prob_22,prob_23,prob_24,prob_25,
-                prob_26,prob_27,prob_28,prob_29,prob_30,prob_31,prob_32,prob_33,
-                prob_34,prob_35,prob_36,prob_37,prob_38,prob_39,prob_40,prob_41,
-                prob_42,prob_43,prob_44,prob_45,prob_46,prob_47,prob_48,prob_49,
-                prob_50,prob_51,prob_52,prob_53,prob_54,prob_55,prob_56,prob_57]
+                prob_26,prob_27,#prob_28,
+                prob_29,prob_30,prob_31,prob_32,#prob_33,
+                prob_34,prob_35,prob_36,prob_37,prob_38,prob_39,prob_40,#prob_41,
+                prob_42,prob_43,prob_44,prob_45,#prob_46,
+                prob_47,#prob_48,
+                prob_49, prob_50,prob_51,prob_52,prob_53,prob_54,prob_55,prob_56,prob_57]
 
 stats = bmark_solvers(solver_list, problem_list)
+
+score(h) = h.elapsed_time
+plt = performance_profile(stats, score)

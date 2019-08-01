@@ -1,6 +1,6 @@
 include("mpmodel.jl")
 
-function arglina(nvar::Int=10, precisions::Vector{DataType}=builtin_fps)
+function arglina(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     m = 2*n
@@ -10,7 +10,7 @@ function arglina(nvar::Int=10, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, ones(nvar), precisions, name="arglina")
 end
 
-function arglinb(nvar::Int=10, precisions::Vector{DataType}=builtin_fps)
+function arglinb(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     m=2*n
@@ -20,7 +20,7 @@ function arglinb(nvar::Int=10, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, ones(nvar), precisions, name="arglinb")
 end
 
-function arglinc(nvar::Int=10, precisions::Vector{DataType}=builtin_fps)
+function arglinc(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     m=2*n
@@ -30,7 +30,7 @@ function arglinc(nvar::Int=10, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, ones(nvar), precisions, name="arglinc")
 end
 
-function arwhead(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function arwhead(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return sum((x[i]^2 + x[n]^2)^2 - 4 * x[i] + 3 for i=1:n-1)
@@ -39,7 +39,7 @@ function arwhead(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, ones(nvar), precisions, name="arwhead")
 end
 
-function bdqrtic(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function bdqrtic(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 5 || error("bdqrtic : nvar >= 5")
 
@@ -51,7 +51,7 @@ function bdqrtic(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, ones(nvar), precisions, name="bdqrtic")
 end
 
-function beale(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function beale(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return  (1.5 + x[1] * (1.0 - x[2]))^2 + (2.25 + x[1] * (1.0 - x[2]^2))^2 + (2.625 + x[1] * (1.0 - x[2]^3))^2
@@ -60,7 +60,7 @@ function beale(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, ones(nvar), precisions, name="beale")
 end
 
-function broydn7d(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function broydn7d(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   n2 = max(1, div(nvar, 2))
   nvar = 2 * n2 #number of variables adjusted to be even
@@ -77,7 +77,7 @@ function broydn7d(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, (-1)*ones(nvar), precisions, name="broydn7d")
 end
 
-function brybnd(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function brybnd(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   n2 = max(1, div(nvar, 2))
   nvar = 2 * n2 #number of variables adjusted to be even
@@ -99,7 +99,7 @@ function brybnd(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, (-1)*ones(nvar), precisions, name="brybnd")
 end
 
-function chainwoo(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function chainwoo(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar = 4 * max(1, div(nvar, 4)) #number of variables adjusted to be a multiple of 4
 
@@ -113,7 +113,7 @@ function chainwoo(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, (-2)*ones(nvar), precisions, name="chainwoo")
 end
 
-function chnrosnb_mod(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function chnrosnb_mod(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || ("chnrosnb_mod : nvar >= 2")
 
@@ -125,7 +125,7 @@ function chnrosnb_mod(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, (-1)*ones(nvar), precisions, name="chnrosnb_mod")
 end
 
-function cosine(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function cosine(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return sum(cos(x[i]^2 - x[i+1] / 2) for i = 1:n-1)
@@ -134,7 +134,7 @@ function cosine(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, ones(nvar), precisions, name="cosine")
 end
 
-function cragglvy(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function cragglvy(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("cragglvy : nvar>=2")
 
@@ -148,7 +148,7 @@ function cragglvy(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, 2*ones(nvar), precisions, name="cragglvy")
 end
 
-function dixmaane(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function dixmaane(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   m = max(1, div(nvar, 3))
   nvar = 3 * m #number of variables adjusted to be a multiple of 3
@@ -169,7 +169,7 @@ function dixmaane(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, 2 * ones(nvar), precisions, name="dixmaane")
 end
 
-function dixmaani(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function dixmaani(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   m = max(1, div(nvar, 3))
   nvar = 3 * m #number of variables adjusted to be a multiple of 3
@@ -189,7 +189,7 @@ function dixmaani(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
 
   return MPModel(nvar, f, 2 * ones(nvar), precisions, name="dixmaani")
 end
-function dixmaanm(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function dixmaanm(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   m = max(1, div(nvar, 3))
   nvar = 3 * m #number of variables adjusted to be a multiple of 3
@@ -210,7 +210,7 @@ function dixmaanm(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, 2 * ones(nvar), precisions, name="dixmaanm")
 end
 
-function dixon3dq(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function dixon3dq(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return (x[1] - 1.0)^2 + (x[n] - 1.0)^2 + sum((x[i] - x[i+1])^2 for i=2:n-1)
@@ -219,7 +219,7 @@ function dixon3dq(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, (-1) * ones(nvar), precisions, name="dixon3dq")
 end
 
-function dqdrtic(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function dqdrtic(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return sum(x[i]^2 + 100 * (x[i+1]^2 + x[i+2]^2) for i=1:n-2)
@@ -228,7 +228,7 @@ function dqdrtic(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, 3 * ones(nvar), precisions, name="dqdrtic")
 end
 
-function dqrtic(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function dqrtic(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return sum((x[i] - i)^4 for i=1:n)
@@ -237,7 +237,7 @@ function dqrtic(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, 2 * ones(nvar), precisions, name="dqrtic")
 end
 
-function edensch(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function edensch(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return 16 + sum((x[i] - 2)^4 + (x[i] * x[i+1] - 2 * x[i+1])^2 + (x[i+1] + 1)^2 for i=1:n-1)
@@ -246,7 +246,7 @@ function edensch(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, zeros(nvar), precisions, name="edensch")
 end
 
-function eg2(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function eg2(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     sum(sin(x[1] + x[i]^2 - 1) for i=1:n-1) + sin(x[n]^2) / 2
@@ -255,7 +255,7 @@ function eg2(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, zeros(nvar), precisions, name="eg2")
 end
 
-function engval1(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function engval1(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("engval : nvar >= 2")
 
@@ -270,7 +270,7 @@ function engval1(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, 2*ones(nvar), precisions, name="engval1")
 end
 
-function errinros_mod(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function errinros_mod(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("errinros_mod : nvar >= 2")
 
@@ -282,7 +282,7 @@ function errinros_mod(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, -ones(nvar), precisions, name="errinros_mod")
 end
 
-function extrosnb(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function extrosnb(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return 100 * sum((x[i] - x[i-1]^2)^2 for i=2:n) + (1 - x[1])^2
@@ -291,7 +291,7 @@ function extrosnb(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, -ones(nvar), precisions, name="extrosnb")
 end
 
-function fletcbv2(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function fletcbv2(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("fletcbv2 : nvar >= 2")
 
@@ -305,7 +305,7 @@ function fletcbv2(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, [(i/(nvar+1.0)) for i=1:nvar], precisions, name="fletcbv2")
 end
 
-function fletcbv3_mod(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function fletcbv3_mod(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("fletcbv3_mod : nvar >= 2")
 
@@ -320,7 +320,7 @@ function fletcbv3_mod(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, [(i/(nvar+1.0)) for i=1:nvar], precisions, name="fletcbv3_mod")
 end
 
-function fletchcr(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function fletchcr(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return 100 * sum((x[i+1] - x[i] + 1 - x[i]^2)^2 for i=1:n-1)
@@ -329,7 +329,7 @@ function fletchcr(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, zeros(nvar), precisions, name="fletchcr")
 end
 
-function freuroth(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function freuroth(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return sum(((5 - x[i+1]) * x[i+1]^2 + x[i] - 2 * x[i+1] - 13)^2 for i=1:n-1) + sum(((1 + x[i+1]) * x[i+1]^2 + x[i] - 14 * x[i+1] - 29)^2 for i=1:n-1)
@@ -341,7 +341,7 @@ function freuroth(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, x0, precisions, name="freuroth")
 end
 
-function genhumps(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function genhumps(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     ζ = 20
@@ -353,7 +353,7 @@ function genhumps(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, x0, precisions, name="genhumps")
 end
 
-function genrose(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function genrose(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return 1 + 100 * sum((x[i+1] - x[i]^2)^2 for i=1:n-1) + sum((x[i] - 1)^2 for  i=1:n-1)
@@ -363,7 +363,7 @@ function genrose(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, x0, precisions, name="genrose")
 end
 
-function genrose_nash(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function genrose_nash(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("genrose_nash : nvar >= 2")
 
@@ -375,7 +375,7 @@ function genrose_nash(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, [(i/(nvar+1.0)) for i=1:nvar], precisions, name="genrose_nash")
 end
 
-function indef_mod(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function indef_mod(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 3 || error("indef_mod : nvar >= 3")
 
@@ -387,7 +387,7 @@ function indef_mod(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, [(i/(nvar+1.0)) for i=1:nvar], precisions, name="indef_mod")
 end
 
-function liarwhd(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function liarwhd(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("liarwhd : nvar >= 2")
 
@@ -399,7 +399,7 @@ function liarwhd(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, 4*ones(nvar), precisions, name="liarwhd")
 end
 
-function morebv(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function morebv(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("morebv : nvar >= 2")
 
@@ -416,7 +416,7 @@ function morebv(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, x0, precisions, name="morebv")
 end
 
-function ncb20(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function ncb20(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 20 || error("ncb20 : nvar >= 20")
 
@@ -435,7 +435,7 @@ function ncb20(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, x0, precisions, name="ncb20")
 end
 
-function ncb20b(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function ncb20b(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 20 || error("ncb20 : nvar >= 20")
 
@@ -449,7 +449,7 @@ function ncb20b(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, zeros(nvar), precisions, name="ncb20")
 end
 
-function noncvxu2(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function noncvxu2(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("noncvxu2 : nvar >= 2")
 
@@ -462,7 +462,7 @@ function noncvxu2(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, Float64.([i for i=1:nvar]), precisions, name="noncvxu2")
 end
 
-function noncvxun(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function noncvxun(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("noncvxun : nvar >= 2")
 
@@ -475,7 +475,7 @@ function noncvxun(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, Float64.([i for i=1:nvar]), precisions, name="noncvxun")
 end
 
-function nondia(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function nondia(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("nondia : nvar >= 2")
 
@@ -487,7 +487,7 @@ function nondia(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, -ones(nvar), precisions, name="nondia")
 end
 
-function nondquar(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function nondquar(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return (x[1] - x[2])^2 + (x[n-1] - x[n])^2 + sum((x[i] + x[i+1] + x[n])^4 for i=1:n-2)
@@ -498,7 +498,7 @@ function nondquar(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, x0, precisions, name="nondquar")
 end
 
-function NZF1(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function NZF1(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     nbis = max(1,div(n,13))
@@ -517,7 +517,7 @@ function NZF1(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, ones(nvar), precisions, name="NZF1")
 end
 
-function penalty2(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function penalty2(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 3 || error("penalty2 : nvar >= 3")
 
@@ -538,7 +538,7 @@ function penalty2(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, (1/2) * ones(nvar), precisions, name="penalty2")
 end
 
-function penalty3(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function penalty3(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 3 || error("penalty3 : nvar >= 3")
 
@@ -554,7 +554,7 @@ function penalty3(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, [i/(nvar+1) for i=1:nvar], precisions, name="penalty3")
 end
 
-function powellsg(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function powellsg(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar = 4 * max(1, div(nvar, 4)) #number of variables adjusted to be a multiple of 4
 
@@ -584,7 +584,7 @@ function quartc(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, 2*ones(nvar), precisions, name="quartc")
 end
 
-function sbrybnd(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function sbrybnd(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("sbrybnd : nvar >= 2")
   p = zeros(nvar)
@@ -602,7 +602,7 @@ function sbrybnd(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, [1/p[i] for i=1:nvar], precisions, name="sbrybnd")
 end
 
-function schmvett(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function schmvett(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return sum(-(1 / (1 + (x[i] - x[i+1])^2)) - sin((π * x[i+1] + x[i+2]) / 2) - exp(-((x[i] + x[i+2]) / x[i+1] - 2)^2) for i=1:n-2)
@@ -611,7 +611,7 @@ function schmvett(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, 3 * ones(nvar), precisions, name="schmvett")
 end
 
-function scosine(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function scosine(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("scosine : nvar >= 2")
   p = zeros(nvar)
@@ -627,7 +627,7 @@ function scosine(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f,[1/p[i] for i=1:nvar], precisions, name="scosine")
 end
 
-function sparsine(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function sparsine(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 10 || error("sparsine : nvar >= 10")
 
@@ -645,7 +645,7 @@ function sparsine(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f,0.5*ones(nvar), precisions, name="sparsine")
 end
 
-function sparsqur(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function sparsqur(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 10 || error("sparsqur : nvar >= 10")
 
@@ -663,7 +663,7 @@ function sparsqur(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f,0.5*ones(nvar), precisions, name="sparsqur")
 end
 
-function srosenbr(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function srosenbr(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar = 2 * max(1, div(nvar, 2)) #number of variables adjusted to be even
 
@@ -678,7 +678,7 @@ function srosenbr(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f,0.5*ones(nvar), precisions, name="srosenbr")
 end
 
-function sinquad(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function sinquad(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x) # sinquad objective
     n = length(x)
     return (x[1] - 4)^4 + (x[n]^2 - x[1]^2)^2 + sum((sin(x[i] - x[n]) - x[1]^2 + x[i]^2)^2 for i=2:n-1)
@@ -687,7 +687,7 @@ function sinquad(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, 0.1 * ones(nvar), precisions, name="sinquad")
 end
 
-function tointgss(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function tointgss(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 3 || error("tointgss : nvar >= 3")
 
@@ -699,7 +699,7 @@ function tointgss(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f,3*ones(nvar), precisions, name="tointgss")
 end
 
-function tquartic(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function tquartic(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar >= 2 || error("tquartic : nvar >= 2")
 
@@ -711,7 +711,7 @@ function tquartic(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f,ones(nvar), precisions, name="tquartic")
 end
 
-function tridia(nvar::Int=10000, precisions::Vector{DataType}=builtin_fps)
+function tridia(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   function f(x)
     n = length(x)
@@ -725,7 +725,7 @@ function tridia(nvar::Int=10000, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f,ones(nvar), precisions, name="tridia")
 end
 
-function vardim(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function vardim(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
   function f(x)
     n = length(x)
     return sum((x[i] - 1)^2 for i=1:n) + sum(i * (x[i] - 1) for i=1:n)^2 + sum(i * (x[i] - 1) for i=1:n)^4
@@ -735,7 +735,7 @@ function vardim(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
   return MPModel(nvar, f, x0, precisions, name="vardim")
 end
 
-function woods(nvar::Int=100, precisions::Vector{DataType}=builtin_fps)
+function woods(nvar::Int=1000, precisions::Vector{DataType}=builtin_fps)
 
   nvar = 4 * max(1, div(nvar, 4)) #number of variables adjusted to be a multiple of 4
 
